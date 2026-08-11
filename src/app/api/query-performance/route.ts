@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { executePerformanceQuery } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
