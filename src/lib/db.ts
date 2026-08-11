@@ -74,7 +74,7 @@ function seedVercelDatabase(db: Database.Database) {
 
     for (const app of sampleApps) {
       const res = insertApp.run(app[0], app[1], app[2], app[3], app[4]);
-      const appId = res.lastInsertRowid;
+      const appId = Number(res.lastInsertRowid);
 
       // Link SDKs
       for (let sdkId = 1; sdkId <= 12; sdkId++) {
