@@ -68,10 +68,10 @@ function seedFallbackData(db: Database.Database) {
         const appId = res.lastInsertRowid;
 
         // Link with default SDKs
-        insertLink.run(appId, 1); // Stripe
-        insertLink.run(appId, 2); // Firebase
-        insertLink.run(appId, 3); // Sentry
-        insertLink.run(appId, 4); // Mixpanel
+        insertLink.run(appId, 1);
+        insertLink.run(appId, 2);
+        insertLink.run(appId, 3);
+        insertLink.run(appId, 4);
       }
     }
   } catch (e) {
@@ -154,108 +154,126 @@ export interface SDKStat {
 }
 
 export function getPipelineStats() {
-  const db = getDb();
-  
-  const appsCount = (db.prepare('SELECT count(*) as count FROM apps;').get() as any)?.count || 0;
-  const linksCount = (db.prepare('SELECT count(*) as count FROM app_sdks;').get() as any)?.count || 0;
-  const sdksCount = (db.prepare('SELECT count(*) as count FROM sdks;').get() as any)?.count || 0;
-  
-  let dbSizeBytes = 0;
-  const { dbPath } = locateDbFile();
-  if (fs.existsSync(dbPath)) {
-    const stat = fs.statSync(dbPath);
-    dbSizeBytes = stat.size;
+  try {
+    const db = getDb();
+    
+    const appsCount = (db.prepare('SELECT count(*) as count FROM apps;').get() as any)?.count || 0;
+    const linksCount = (db.prepare('SELECT count(*) as count FROM app_sdks;').get() as any)?.count || 0;
+    const sdksCount = (db.prepare('SELECT count(*) as count FROM sdks;').get() as any)?.count || 0;
+    
+    let dbSizeBytes = 0;
+    const { dbPath } = locateDbFile();
+    if (fs.existsSync(dbPath)) {
+      const stat = fs.statSync(dbPath);
+      dbSizeBytes = stat.size;
+    }
+
+    const indexCheck = db.prepare("SELECT count(*) as count FROM sqlite_master WHERE type='index' AND name='idx_app_sdks_sdk_id';").get() as any;
+    const indexActive = (indexCheck?.count || 0) > 0;
+
+    return {
+      appsCount,
+      linksCount,
+      sdksCount,
+      dbSizeBytes,
+      dbSizeFormatted: `${(dbSizeBytes / (1024 * 1024)).toFixed(2)} MB`,
+      indexActive
+    };
+  } catch (err: any) {
+    console.error('getPipelineStats error:', err);
+    return {
+      appsCount: 0,
+      linksCount: 0,
+      sdksCount: 0,
+      dbSizeBytes: 0,
+      dbSizeFormatted: '0 MB',
+      indexActive: false
+    };
   }
-
-  // Index health status check
-  const indexCheck = db.prepare("SELECT count(*) as count FROM sqlite_master WHERE type='index' AND name='idx_app_sdks_sdk_id';").get() as any;
-  const indexActive = (indexCheck?.count || 0) > 0;
-
-  return {
-    appsCount,
-    linksCount,
-    sdksCount,
-    dbSizeBytes,
-    dbSizeFormatted: `${(dbSizeBytes / (1024 * 1024)).toFixed(2)} MB`,
-    indexActive
-  };
 }
 
 export function getSDKAdoptionList(): SDKStat[] {
-  const db = getDb();
-  const totalApps = (db.prepare('SELECT count(*) as count FROM apps;').get() as any)?.count || 1;
+  try {
+    const db = getDb();
+    const totalApps = (db.prepare('SELECT count(*) as count FROM apps;').get() as any)?.count || 1;
 
-  const query = `
-    SELECT 
-      s.id, s.name, s.slug, s.category, s.signature_pattern,
-      SUM(CASE WHEN a.platform = 'android' THEN 1 ELSE 0 END) as android_apps_count,
-      SUM(CASE WHEN a.platform = 'ios' THEN 1 ELSE 0 END) as ios_apps_count,
-      COUNT(link.app_id) as total_apps_count
-    FROM sdks s
-    LEFT JOIN app_sdks link ON s.id = link.sdk_id
-    LEFT JOIN apps a ON link.app_id = a.id
-    GROUP BY s.id
-    ORDER BY total_apps_count DESC;
-  `;
+    const query = `
+      SELECT 
+        s.id, s.name, s.slug, s.category, s.signature_pattern,
+        SUM(CASE WHEN a.platform = 'android' THEN 1 ELSE 0 END) as android_apps_count,
+        SUM(CASE WHEN a.platform = 'ios' THEN 1 ELSE 0 END) as ios_apps_count,
+        COUNT(link.app_id) as total_apps_count
+      FROM sdks s
+      LEFT JOIN app_sdks link ON s.id = link.sdk_id
+      LEFT JOIN apps a ON link.app_id = a.id
+      GROUP BY s.id
+      ORDER BY total_apps_count DESC;
+    `;
 
-  const rows = db.prepare(query).all() as any[];
+    const rows = (db.prepare(query).all() as any[]) || [];
 
-  return rows.map(r => ({
-    id: r.id,
-    name: r.name,
-    slug: r.slug,
-    category: r.category,
-    signature_pattern: r.signature_pattern,
-    android_apps_count: r.android_apps_count || 0,
-    ios_apps_count: r.ios_apps_count || 0,
-    total_apps_count: r.total_apps_count || 0,
-    penetration_pct: parseFloat(((r.total_apps_count / totalApps) * 100).toFixed(1))
-  }));
+    return rows.map(r => ({
+      id: r.id,
+      name: r.name,
+      slug: r.slug,
+      category: r.category,
+      signature_pattern: r.signature_pattern,
+      android_apps_count: r.android_apps_count || 0,
+      ios_apps_count: r.ios_apps_count || 0,
+      total_apps_count: r.total_apps_count || 0,
+      penetration_pct: parseFloat(((r.total_apps_count / (totalApps || 1)) * 100).toFixed(1))
+    }));
+  } catch (err: any) {
+    console.error('getSDKAdoptionList error:', err);
+    return [];
+  }
 }
 
 export function executePerformanceQuery(sdkId: number, platform: string) {
-  const db = getDb();
+  try {
+    const db = getDb();
 
-  const dataQuery = `
-    SELECT a.id, a.name, a.bundle_id, a.platform, a.developer, a.installs 
-    FROM apps a
-    JOIN app_sdks link ON a.id = link.app_id
-    WHERE link.sdk_id = ? AND a.platform = ?
-    ORDER BY a.installs DESC
-    LIMIT 50;
-  `;
+    const dataQuery = `
+      SELECT a.id, a.name, a.bundle_id, a.platform, a.developer, a.installs 
+      FROM apps a
+      JOIN app_sdks link ON a.id = link.app_id
+      WHERE link.sdk_id = ? AND a.platform = ?
+      ORDER BY a.installs DESC
+      LIMIT 50;
+    `;
 
-  const startTime = process.hrtime();
-  const data = db.prepare(dataQuery).all(sdkId, platform);
-  const elapsed = process.hrtime(startTime);
-  const executionMs = (elapsed[0] * 1000 + elapsed[1] / 1000000).toFixed(3);
+    const startTime = process.hrtime();
+    const data = (db.prepare(dataQuery).all(sdkId, platform) as any[]) || [];
+    const elapsed = process.hrtime(startTime);
+    const executionMs = (elapsed[0] * 1000 + elapsed[1] / 1000000).toFixed(3);
 
-  // Explain Query Plan
-  const planRows = db.prepare(`EXPLAIN QUERY PLAN ${dataQuery}`).all(sdkId, platform) as any[];
-  const explainPlan = planRows.map(r => r.detail || JSON.stringify(r));
+    // Explain Query Plan
+    const planRows = (db.prepare(`EXPLAIN QUERY PLAN ${dataQuery}`).all(sdkId, platform) as any[]) || [];
+    const explainPlan = planRows.map(r => r.detail || JSON.stringify(r));
 
-  return {
-    sdkId,
-    platform,
-    executionMs: parseFloat(executionMs),
-    resultCount: data.length,
-    data,
-    explainPlan
-  };
+    return {
+      sdkId,
+      platform,
+      executionMs: parseFloat(executionMs),
+      resultCount: data.length,
+      data,
+      explainPlan
+    };
+  } catch (err: any) {
+    console.error('executePerformanceQuery error:', err);
+    return {
+      sdkId,
+      platform,
+      executionMs: 0,
+      resultCount: 0,
+      data: [],
+      explainPlan: ['Query plan unavailable: ' + (err?.message || String(err))],
+      error: err?.message || String(err)
+    };
+  }
 }
 
 export function executeBenchmarkTest(sdkId: number = 1, platform: string = 'android', iterations: number = 5) {
-  const db = getDb();
-
-  const testQuery = `
-    SELECT a.name, a.bundle_id, a.installs 
-    FROM apps a
-    JOIN app_sdks link ON a.id = link.app_id
-    WHERE link.sdk_id = ? AND a.platform = ?
-    ORDER BY a.installs DESC
-    LIMIT 50;
-  `;
-
   const isVercel = process.env.VERCEL === '1';
 
   let indexedMs = 0.45;
@@ -264,6 +282,16 @@ export function executeBenchmarkTest(sdkId: number = 1, platform: string = 'andr
   let unindexedPlan: string[] = ['SEARCH a USING INDEX idx_apps_platform_installs (platform=?)', 'SCAN link'];
 
   try {
+    const db = getDb();
+    const testQuery = `
+      SELECT a.name, a.bundle_id, a.installs 
+      FROM apps a
+      JOIN app_sdks link ON a.id = link.app_id
+      WHERE link.sdk_id = ? AND a.platform = ?
+      ORDER BY a.installs DESC
+      LIMIT 50;
+    `;
+
     if (!isVercel) {
       // 1. With Index
       db.exec('CREATE INDEX IF NOT EXISTS idx_app_sdks_sdk_id ON app_sdks(sdk_id);');
@@ -290,7 +318,7 @@ export function executeBenchmarkTest(sdkId: number = 1, platform: string = 'andr
       // Restore Index
       db.exec('CREATE INDEX IF NOT EXISTS idx_app_sdks_sdk_id ON app_sdks(sdk_id);');
     } else {
-      // On Vercel (read-only DB), measure indexed query & provide plan
+      // On Vercel (read-only DB), measure indexed query safely
       indexedPlan = (db.prepare(`EXPLAIN QUERY PLAN ${testQuery}`).all(sdkId, platform) as any[]).map(r => r.detail);
       const startIndexed = process.hrtime();
       for (let i = 0; i < iterations; i++) {
