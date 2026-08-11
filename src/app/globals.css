@@ -4,12 +4,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #000000;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: #000000;
+  background: #ffffff;
   font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -34,11 +34,13 @@ body {
   background: #84cc16;
 }
 
-/* Crisp light borders & subtle shadows */
-.card-shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+/* Lime Highlight utilities */
+.lime-pill {
+  background-color: #ecfccb;
+  color: #1a2e05;
+  border: 1px solid #a3e635;
 }
 
-.lime-glow {
-  box-shadow: 0 0 20px -5px rgba(132, 204, 22, 0.3);
+.lime-card-glow {
+  box-shadow: 0 4px 20px -2px rgba(163, 230, 53, 0.25);
 }
