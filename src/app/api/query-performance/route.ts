@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next';
 import { executePerformanceQuery } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
@@ -10,6 +10,10 @@ export async function GET(request: NextRequest) {
     const result = executePerformanceQuery(sdk_id, platform);
     return NextResponse.json(result);
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error('Error in /api/query-performance:', error);
+    return NextResponse.json({ 
+      error: error?.message || 'Internal Server Error',
+      details: String(error)
+    }, { status: 500 });
   }
 }
