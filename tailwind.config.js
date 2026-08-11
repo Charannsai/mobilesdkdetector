@@ -8,18 +8,7 @@ module.exports = {
     extend: {
       colors: {
         background: "#ffffff",
-        surface: "#f8fafc",
-        "surface-border": "#e2e8f0",
-        lime: {
-          50: "#f7fee7",
-          100: "#ecfccb",
-          200: "#d9f99d",
-          300: "#a3e635",
-          400: "#84cc16",
-          500: "#65a30d",
-          600: "#4d7c0f",
-          900: "#1a2e05",
-        },
+        accent: "#1d1d1d",
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
