@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.fitlife.ios.tracker</string>
+	<key>CFBundleName</key>
+	<string>FitLife Tracker & Health</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.4.1</string>
+	<key>InstallsEstimated</key>
+	<integer>4200000</integer>
+	<key>SDKFrameworks</key>
+	<array>
+		<string>AdjustSDK.framework</string>
+		<string>RevenueCat.framework</string>
+		<string>SentryClient.framework</string>
+		<string>AppsFlyerLib.framework</string>
+		<string>Amplitude.framework</string>
+	</array>
+</dict>
+</plist>

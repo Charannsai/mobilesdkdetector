@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rideexpress.mobility"
+    android:versionCode="240"
+    android:versionName="2.4.0">
+
+    <application
+        android:name="com.rideexpress.MobilityApplication"
+        android:label="RideExpress Mobility">
+        
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+            
+        <meta-data
+            android:name="onesignal_app_id"
+            android:value="b2f3a4e5-6789-4abc-def0-123456789abc" />
+
+        <service android:name="com.segment.analytics.SegmentIntegration" />
+        <service android:name="com.datadog.android.DatadogEventListener" />
+        <activity android:name="com.stripe.android.view.PaymentMethodsActivity" />
+    </application>
+</manifest>
