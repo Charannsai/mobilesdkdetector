@@ -159,74 +159,74 @@ export default function Dashboard() {
   const selectedSdkObj = sdks.find(s => s.id === selectedSdkId) || sdks[0];
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-[#fafafa] flex flex-col font-sans">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans">
       
       {/* HEADER / NAVIGATION */}
-      <header className="border-b border-[#27272a] bg-[#09090b]/80 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-slate-200 bg-white/90 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-[#18181b] border border-lime-400/40 rounded-lg text-lime-400">
+            <div className="p-2 bg-slate-900 text-lime-400 rounded-xl shadow-sm">
               <Cpu className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-semibold text-lg tracking-tight text-white">SDK DETECTOR</h1>
-                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-lime-400/10 text-lime-400 border border-lime-400/30">
+                <h1 className="font-bold text-xl tracking-tight text-slate-900 font-sans">SDK DETECTOR</h1>
+                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-lime-100 text-lime-800 font-bold border border-lime-300">
                   MixRank Pipeline
                 </span>
               </div>
-              <p className="text-xs text-[#a1a1aa]">Static Analysis Engine & Relational Query Profiler</p>
+              <p className="text-xs text-slate-500">Static Analysis Engine & Relational Query Profiler</p>
             </div>
           </div>
 
           {/* Nav Tabs */}
-          <nav className="flex items-center gap-1 bg-[#121215] p-1 rounded-lg border border-[#27272a] overflow-x-auto">
+          <nav className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 overflow-x-auto">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'overview'
-                  ? 'bg-[#27272a] text-lime-300 shadow-sm border border-lime-400/20'
-                  : 'text-[#a1a1aa] hover:text-white hover:bg-[#18181b]'
+                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
-              <Activity className="w-3.5 h-3.5" />
+              <Activity className="w-3.5 h-3.5 text-lime-600" />
               Overview
             </button>
 
             <button
               onClick={() => setActiveTab('sdks')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'sdks'
-                  ? 'bg-[#27272a] text-lime-300 shadow-sm border border-lime-400/20'
-                  : 'text-[#a1a1aa] hover:text-white hover:bg-[#18181b]'
+                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
-              <Layers className="w-3.5 h-3.5" />
+              <Layers className="w-3.5 h-3.5 text-lime-600" />
               SDK Market Matrix
             </button>
 
             <button
               onClick={() => setActiveTab('console')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'console'
-                  ? 'bg-[#27272a] text-lime-300 shadow-sm border border-lime-400/20'
-                  : 'text-[#a1a1aa] hover:text-white hover:bg-[#18181b]'
+                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
-              <Terminal className="w-3.5 h-3.5" />
+              <Terminal className="w-3.5 h-3.5 text-lime-600" />
               Query Console & EXPLAIN
             </button>
 
             <button
               onClick={() => setActiveTab('benchmark')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'benchmark'
-                  ? 'bg-[#27272a] text-lime-300 shadow-sm border border-lime-400/20'
-                  : 'text-[#a1a1aa] hover:text-white hover:bg-[#18181b]'
+                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
-              <Zap className="w-3.5 h-3.5 text-lime-400" />
+              <Zap className="w-3.5 h-3.5 text-lime-500 fill-lime-500" />
               Index Profiler
             </button>
           </nav>
@@ -237,31 +237,31 @@ export default function Dashboard() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
         {/* TOP SYSTEM STATUS STRIP */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-[#121215] border border-[#27272a]">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 shadow-sm">
           <div className="flex items-center gap-3">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-400"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-500"></span>
             </span>
-            <span className="text-xs font-mono text-[#e4e4e7]">
-              Pipeline Ready & Ingestion Active
+            <span className="text-xs font-mono font-medium text-slate-800">
+              Pipeline Operational & SQLite WAL Active
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-mono text-[#a1a1aa]">
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-600">
             <span className="flex items-center gap-1.5">
-              <Database className="w-3.5 h-3.5 text-lime-400" />
-              SQLite WAL Storage
+              <Database className="w-3.5 h-3.5 text-lime-600" />
+              Engine: SQLite WAL
             </span>
-            <span className="border-r border-[#27272a] h-3"></span>
+            <span className="border-r border-slate-300 h-3"></span>
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-lime-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-lime-600" />
               Indexes: {stats?.indexActive ? 'Active' : 'Unindexed'}
             </span>
-            <span className="border-r border-[#27272a] h-3"></span>
+            <span className="border-r border-slate-300 h-3"></span>
             <button 
               onClick={fetchStatsAndSdks}
-              className="flex items-center gap-1 text-lime-400 hover:underline"
+              className="flex items-center gap-1 text-lime-700 hover:text-lime-900 font-semibold"
             >
               <RefreshCw className={`w-3 h-3 ${loadingStats ? 'animate-spin' : ''}`} />
               Sync Stats
@@ -276,99 +276,99 @@ export default function Dashboard() {
             {/* KPI STAT CARDS */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
-              <div className="p-5 rounded-xl bg-[#121215] border border-[#27272a] space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#a1a1aa]">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all space-y-2">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
                   <span>Total Apps Crawled</span>
-                  <Server className="w-4 h-4 text-lime-400" />
+                  <Server className="w-4 h-4 text-lime-600" />
                 </div>
-                <div className="text-2xl font-bold font-mono text-white">
+                <div className="text-3xl font-bold font-mono text-slate-900">
                   {stats ? stats.appsCount.toLocaleString() : '...'}
                 </div>
-                <p className="text-[11px] text-[#71717a]">Google Play & iOS App Store</p>
+                <p className="text-[11px] text-slate-500">Google Play & iOS App Store</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#121215] border border-[#27272a] space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#a1a1aa]">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all space-y-2">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
                   <span>Detected Relationships</span>
-                  <Layers className="w-4 h-4 text-lime-400" />
+                  <Layers className="w-4 h-4 text-lime-600" />
                 </div>
-                <div className="text-2xl font-bold font-mono text-lime-300">
+                <div className="text-3xl font-bold font-mono text-lime-700">
                   {stats ? stats.linksCount.toLocaleString() : '...'}
                 </div>
-                <p className="text-[11px] text-[#71717a]">App ↔ SDK Footprint Mappings</p>
+                <p className="text-[11px] text-slate-500">App ↔ SDK Footprint Mappings</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#121215] border border-[#27272a] space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#a1a1aa]">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all space-y-2">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
                   <span>Tracked Signatures</span>
-                  <Code className="w-4 h-4 text-lime-400" />
+                  <Code className="w-4 h-4 text-lime-600" />
                 </div>
-                <div className="text-2xl font-bold font-mono text-white">
+                <div className="text-3xl font-bold font-mono text-slate-900">
                   {stats ? stats.sdksCount : '...'}
                 </div>
-                <p className="text-[11px] text-[#71717a]">Payments, Analytics, Crash SDKs</p>
+                <p className="text-[11px] text-slate-500">Payments, Analytics, Crash SDKs</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#121215] border border-[#27272a] space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#a1a1aa]">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all space-y-2">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
                   <span>DB Storage Size</span>
-                  <Database className="w-4 h-4 text-lime-400" />
+                  <Database className="w-4 h-4 text-lime-600" />
                 </div>
-                <div className="text-2xl font-bold font-mono text-white">
+                <div className="text-3xl font-bold font-mono text-slate-900">
                   {stats ? stats.dbSizeFormatted : '...'}
                 </div>
-                <p className="text-[11px] text-[#71717a]">Indexed Relational Database</p>
+                <p className="text-[11px] text-slate-500">Indexed Relational Database</p>
               </div>
 
             </div>
 
             {/* ARCHITECTURE DIAGRAM / PIPELINE OVERVIEW */}
-            <div className="p-6 rounded-xl bg-[#121215] border border-[#27272a] space-y-4">
-              <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-                <h3 className="font-semibold text-sm tracking-tight text-white flex items-center gap-2">
-                  <FileCode2 className="w-4 h-4 text-lime-400" />
+            <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="font-bold text-sm tracking-tight text-slate-900 flex items-center gap-2">
+                  <FileCode2 className="w-4 h-4 text-lime-600" />
                   System Architecture & Pipeline Flow
                 </h3>
-                <span className="text-xs text-lime-400 font-mono">MixRank High-Throughput Design</span>
+                <span className="text-xs font-mono font-semibold text-lime-700">MixRank High-Throughput Design</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-2">
-                <div className="p-4 rounded-lg bg-[#18181b] border border-[#27272a] space-y-2">
-                  <div className="text-[10px] font-mono text-lime-400 uppercase">Step 1: Mock Crawl</div>
-                  <h4 className="font-semibold text-xs text-white">Raw Source Payload</h4>
-                  <p className="text-xs text-[#a1a1aa]">Parses mock Google Play HTML, iOS Info.plist & AndroidManifest.xml arrays.</p>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="text-[10px] font-mono text-lime-700 font-bold uppercase">Step 1: Mock Crawl</div>
+                  <h4 className="font-semibold text-xs text-slate-900">Raw Source Payload</h4>
+                  <p className="text-xs text-slate-600">Parses mock Google Play HTML, iOS Info.plist & AndroidManifest.xml arrays.</p>
                 </div>
 
-                <div className="p-4 rounded-lg bg-[#18181b] border border-[#27272a] space-y-2">
-                  <div className="text-[10px] font-mono text-lime-400 uppercase">Step 2: Static Analysis</div>
-                  <h4 className="font-semibold text-xs text-white">Signature Engine</h4>
-                  <p className="text-xs text-[#a1a1aa]">Evaluates high-speed Regex pattern matchers against decompressed app binary footprints.</p>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="text-[10px] font-mono text-lime-700 font-bold uppercase">Step 2: Static Analysis</div>
+                  <h4 className="font-semibold text-xs text-slate-900">Signature Engine</h4>
+                  <p className="text-xs text-slate-600">Evaluates high-speed Regex pattern matchers against decompressed app binary footprints.</p>
                 </div>
 
-                <div className="p-4 rounded-lg bg-[#18181b] border border-[#27272a] space-y-2">
-                  <div className="text-[10px] font-mono text-lime-400 uppercase">Step 3: Relational Ingestion</div>
-                  <h4 className="font-semibold text-xs text-white">Batch Database Upsert</h4>
-                  <p className="text-xs text-[#a1a1aa]">Bulk writes using transaction blocks and compound B-Tree indexes for fast join lookups.</p>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="text-[10px] font-mono text-lime-700 font-bold uppercase">Step 3: Relational Ingestion</div>
+                  <h4 className="font-semibold text-xs text-slate-900">Batch Database Upsert</h4>
+                  <p className="text-xs text-slate-600">Bulk writes using transaction blocks and compound B-Tree indexes for fast join lookups.</p>
                 </div>
 
-                <div className="p-4 rounded-lg bg-[#18181b] border border-[#27272a] space-y-2">
-                  <div className="text-[10px] font-mono text-lime-400 uppercase">Step 4: Profiling UI</div>
-                  <h4 className="font-semibold text-xs text-white">EXPLAIN ANALYZE Console</h4>
-                  <p className="text-xs text-[#a1a1aa]">Measures query latencies in milliseconds & exposes query planner search costs in real time.</p>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="text-[10px] font-mono text-lime-700 font-bold uppercase">Step 4: Profiling UI</div>
+                  <h4 className="font-semibold text-xs text-slate-900">EXPLAIN ANALYZE Console</h4>
+                  <p className="text-xs text-slate-600">Measures query latencies in milliseconds & exposes query planner search costs in real time.</p>
                 </div>
               </div>
             </div>
 
             {/* TOP SDK PENETRATION LEADERBOARD */}
-            <div className="p-6 rounded-xl bg-[#121215] border border-[#27272a] space-y-4">
-              <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-                <h3 className="font-semibold text-sm tracking-tight text-white flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-lime-400" />
+            <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="font-bold text-sm tracking-tight text-slate-900 flex items-center gap-2">
+                  <BarChart3 className="w-4 h-4 text-lime-600" />
                   Top SDK Penetration Highlights
                 </h3>
                 <button
                   onClick={() => setActiveTab('sdks')}
-                  className="text-xs text-lime-400 hover:underline flex items-center gap-1"
+                  className="text-xs text-lime-700 hover:text-lime-900 font-semibold flex items-center gap-1"
                 >
                   View Full Grid <ArrowUpRight className="w-3 h-3" />
                 </button>
@@ -376,28 +376,28 @@ export default function Dashboard() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {sdks.slice(0, 6).map(sdk => (
-                  <div key={sdk.id} className="p-4 rounded-lg bg-[#18181b] border border-[#27272a] space-y-3">
+                  <div key={sdk.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3 hover:border-slate-300 transition-all">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-sm text-white">{sdk.name}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-lime-400/10 text-lime-300 border border-lime-400/20">
+                      <span className="font-bold text-sm text-slate-900">{sdk.name}</span>
+                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-lime-100 text-lime-800 border border-lime-300">
                         {sdk.category}
                       </span>
                     </div>
 
                     <div className="space-y-1">
-                      <div className="flex justify-between text-xs text-[#a1a1aa]">
+                      <div className="flex justify-between text-xs text-slate-600 font-medium">
                         <span>App Adoption</span>
-                        <span className="font-mono text-lime-400 font-bold">{sdk.penetration_pct}%</span>
+                        <span className="font-mono text-lime-700 font-bold">{sdk.penetration_pct}%</span>
                       </div>
-                      <div className="w-full h-1.5 bg-[#27272a] rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-lime-400 rounded-full transition-all duration-500"
+                          className="h-full bg-lime-500 rounded-full transition-all duration-500"
                           style={{ width: `${Math.min(100, Math.max(5, sdk.penetration_pct))}%` }}
                         ></div>
                       </div>
                     </div>
 
-                    <div className="flex justify-between text-[11px] text-[#71717a] font-mono pt-1">
+                    <div className="flex justify-between text-[11px] text-slate-500 font-mono pt-1">
                       <span>Android: {sdk.android_apps_count.toLocaleString()}</span>
                       <span>iOS: {sdk.ios_apps_count.toLocaleString()}</span>
                     </div>
@@ -414,31 +414,31 @@ export default function Dashboard() {
           <div className="space-y-6 animate-in fade-in duration-300">
             
             {/* CONTROLS STRIP */}
-            <div className="flex flex-col md:flex-row gap-4 justify-between md:items-center p-4 rounded-xl bg-[#121215] border border-[#27272a]">
+            <div className="flex flex-col md:flex-row gap-4 justify-between md:items-center p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
               
               {/* Search input */}
               <div className="relative flex-1 max-w-md">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" />
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
                   type="text"
                   placeholder="Search by SDK name, slug or regex pattern..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#18181b] border border-[#27272a] rounded-lg pl-9 pr-4 py-2 text-xs text-white placeholder-[#71717a] focus:outline-none focus:border-lime-400/50 font-mono"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-lime-500 font-mono"
                 />
               </div>
 
               {/* Category Filter Pills */}
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
-                <Filter className="w-3.5 h-3.5 text-[#71717a] mr-1 shrink-0" />
+                <Filter className="w-3.5 h-3.5 text-slate-400 mr-1 shrink-0" />
                 {categories.map(cat => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-3 py-1 rounded-md text-xs font-mono transition-all shrink-0 ${
+                    className={`px-3 py-1 rounded-lg text-xs font-mono transition-all shrink-0 ${
                       selectedCategory === cat
-                        ? 'bg-lime-400 text-black font-semibold'
-                        : 'bg-[#18181b] text-[#a1a1aa] hover:text-white border border-[#27272a]'
+                        ? 'bg-slate-900 text-lime-400 font-bold'
+                        : 'bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200'
                     }`}
                   >
                     {cat}
@@ -449,10 +449,10 @@ export default function Dashboard() {
             </div>
 
             {/* SDK TABLE MATRIX */}
-            <div className="rounded-xl bg-[#121215] border border-[#27272a] overflow-hidden">
+            <div className="rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-[#18181b] border-b border-[#27272a] text-[#a1a1aa] font-mono uppercase text-[10px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-mono uppercase text-[10px]">
                     <tr>
                       <th className="py-3 px-4">SDK Name</th>
                       <th className="py-3 px-4">Category</th>
@@ -463,40 +463,40 @@ export default function Dashboard() {
                       <th className="py-3 px-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#27272a]/60">
+                  <tbody className="divide-y divide-slate-100">
                     {filteredSdks.map((sdk) => (
-                      <tr key={sdk.id} className="hover:bg-[#18181b]/50 transition-colors">
-                        <td className="py-3 px-4 font-semibold text-white">
+                      <tr key={sdk.id} className="hover:bg-slate-50 transition-colors">
+                        <td className="py-3 px-4 font-bold text-slate-900">
                           <div className="flex items-center gap-2">
                             <span>{sdk.name}</span>
-                            <span className="text-[10px] font-mono text-[#71717a]">({sdk.slug})</span>
+                            <span className="text-[10px] font-mono text-slate-400 font-normal">({sdk.slug})</span>
                           </div>
                         </td>
                         <td className="py-3 px-4">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#27272a] text-lime-300 border border-[#3f3f46]">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-lime-50 text-lime-800 border border-lime-300 font-semibold">
                             {sdk.category}
                           </span>
                         </td>
-                        <td className="py-3 px-4 font-mono text-[#a1a1aa] text-[11px]">
-                          <code className="bg-[#09090b] px-2 py-1 rounded border border-[#27272a] text-lime-200/90">
+                        <td className="py-3 px-4 font-mono text-slate-600 text-[11px]">
+                          <code className="bg-slate-100 px-2 py-1 rounded border border-slate-200 text-slate-800">
                             {sdk.signature_pattern}
                           </code>
                         </td>
-                        <td className="py-3 px-4 text-center font-mono text-[#e4e4e7]">
+                        <td className="py-3 px-4 text-center font-mono text-slate-700">
                           {sdk.android_apps_count.toLocaleString()}
                         </td>
-                        <td className="py-3 px-4 text-center font-mono text-[#e4e4e7]">
+                        <td className="py-3 px-4 text-center font-mono text-slate-700">
                           {sdk.ios_apps_count.toLocaleString()}
                         </td>
                         <td className="py-3 px-4 text-right font-mono">
                           <div className="flex items-center justify-end gap-2">
-                            <div className="w-16 h-1.5 bg-[#27272a] rounded-full overflow-hidden hidden sm:block">
+                            <div className="w-16 h-2 bg-slate-200 rounded-full overflow-hidden hidden sm:block">
                               <div
-                                className="h-full bg-lime-400 rounded-full"
+                                className="h-full bg-lime-500 rounded-full"
                                 style={{ width: `${Math.min(100, Math.max(5, sdk.penetration_pct))}%` }}
                               ></div>
                             </div>
-                            <span className="font-bold text-lime-400">{sdk.penetration_pct}%</span>
+                            <span className="font-bold text-slate-900">{sdk.penetration_pct}%</span>
                           </div>
                         </td>
                         <td className="py-3 px-4 text-right">
@@ -505,7 +505,7 @@ export default function Dashboard() {
                               setSelectedSdkId(sdk.id);
                               setActiveTab('console');
                             }}
-                            className="px-2.5 py-1 rounded bg-[#27272a] hover:bg-lime-400 hover:text-black text-lime-300 font-mono text-[11px] transition-all"
+                            className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-lime-400 font-mono text-[11px] transition-all shadow-sm font-semibold"
                           >
                             Analyze SQL
                           </button>
@@ -525,24 +525,24 @@ export default function Dashboard() {
           <div className="space-y-6 animate-in fade-in duration-300">
             
             {/* QUERY CONTROLS CARD */}
-            <div className="p-6 rounded-xl bg-[#121215] border border-[#27272a] space-y-4">
-              <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-                <h3 className="font-semibold text-sm tracking-tight text-white flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-lime-400" />
+            <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="font-bold text-sm tracking-tight text-slate-900 flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-lime-600" />
                   Parameterized SQL Query Builder & Execution Profiler
                 </h3>
-                <span className="text-xs text-[#a1a1aa] font-mono">MixRank Benchmark Console</span>
+                <span className="text-xs text-slate-500 font-mono">MixRank Benchmark Console</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 
                 {/* SDK Selector */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-[#a1a1aa]">Select SDK Signature:</label>
+                  <label className="text-xs font-mono font-medium text-slate-600">Select SDK Signature:</label>
                   <select
                     value={selectedSdkId}
                     onChange={(e) => setSelectedSdkId(Number(e.target.value))}
-                    className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-lime-400/50"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-lime-500"
                   >
                     {sdks.map(s => (
                       <option key={s.id} value={s.id}>
@@ -554,11 +554,11 @@ export default function Dashboard() {
 
                 {/* Platform Selector */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-[#a1a1aa]">Platform Filter:</label>
+                  <label className="text-xs font-mono font-medium text-slate-600">Platform Filter:</label>
                   <select
                     value={selectedPlatform}
                     onChange={(e) => setSelectedPlatform(e.target.value)}
-                    className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-lime-400/50"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-lime-500"
                   >
                     <option value="android">Android (Google Play)</option>
                     <option value="ios">iOS (App Store)</option>
@@ -570,7 +570,7 @@ export default function Dashboard() {
                   <button
                     onClick={executeConsoleQuery}
                     disabled={loadingQuery}
-                    className="w-full py-2 px-4 rounded-lg bg-lime-400 hover:bg-lime-300 text-black font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full py-2 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 text-lime-400 font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-sm"
                   >
                     <Zap className={`w-4 h-4 ${loadingQuery ? 'animate-bounce' : ''}`} />
                     {loadingQuery ? 'Executing SQL Query...' : 'Execute & EXPLAIN ANALYZE'}
@@ -584,47 +584,47 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               
               {/* RAW SQL QUERY DISPLAY */}
-              <div className="p-5 rounded-xl bg-[#121215] border border-[#27272a] space-y-3">
-                <div className="flex items-center justify-between text-xs text-[#a1a1aa] font-mono">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
                   <span>Target SQL Query</span>
-                  <span className="text-lime-400">Parameterized Input</span>
+                  <span className="text-lime-700 font-semibold">Parameterized Input</span>
                 </div>
-                <div className="p-4 rounded-lg bg-[#09090b] border border-[#27272a] font-mono text-xs text-lime-300 space-y-1 overflow-x-auto">
-                  <p><span className="text-lime-500 font-bold">SELECT</span> a.name, a.bundle_id, a.installs</p>
-                  <p><span className="text-lime-500 font-bold">FROM</span> apps a</p>
-                  <p><span className="text-lime-500 font-bold">JOIN</span> app_sdks link <span className="text-lime-500 font-bold">ON</span> a.id = link.app_id</p>
-                  <p><span className="text-lime-500 font-bold">WHERE</span> link.sdk_id = <span className="text-white bg-[#27272a] px-1.5 rounded">{selectedSdkId}</span> AND a.platform = <span className="text-white bg-[#27272a] px-1.5 rounded">'{selectedPlatform}'</span></p>
-                  <p><span className="text-lime-500 font-bold">ORDER BY</span> a.installs <span className="text-lime-500 font-bold">DESC</span></p>
-                  <p><span className="text-lime-500 font-bold">LIMIT</span> 50;</p>
+                <div className="p-4 rounded-xl bg-slate-900 font-mono text-xs text-lime-300 space-y-1 overflow-x-auto">
+                  <p><span className="text-lime-400 font-bold">SELECT</span> a.name, a.bundle_id, a.installs</p>
+                  <p><span className="text-lime-400 font-bold">FROM</span> apps a</p>
+                  <p><span className="text-lime-400 font-bold">JOIN</span> app_sdks link <span className="text-lime-400 font-bold">ON</span> a.id = link.app_id</p>
+                  <p><span className="text-lime-400 font-bold">WHERE</span> link.sdk_id = <span className="text-white bg-slate-800 px-1.5 rounded">{selectedSdkId}</span> AND a.platform = <span className="text-white bg-slate-800 px-1.5 rounded">'{selectedPlatform}'</span></p>
+                  <p><span className="text-lime-400 font-bold">ORDER BY</span> a.installs <span className="text-lime-400 font-bold">DESC</span></p>
+                  <p><span className="text-lime-400 font-bold">LIMIT</span> 50;</p>
                 </div>
               </div>
 
               {/* EXPLAIN QUERY PLAN PANEL */}
-              <div className="p-5 rounded-xl bg-[#121215] border border-[#27272a] space-y-3">
-                <div className="flex items-center justify-between text-xs text-[#a1a1aa] font-mono">
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-lime-400" />
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
+                  <span className="flex items-center gap-1.5 font-medium text-slate-700">
+                    <Clock className="w-3.5 h-3.5 text-lime-600" />
                     EXPLAIN QUERY PLAN Output
                   </span>
                   {queryResult && (
-                    <span className="font-bold text-lime-400 bg-lime-400/10 px-2 py-0.5 rounded border border-lime-400/30">
+                    <span className="font-bold text-lime-800 bg-lime-100 px-2 py-0.5 rounded border border-lime-300">
                       {queryResult.executionMs} ms
                     </span>
                   )}
                 </div>
 
-                <div className="p-4 rounded-lg bg-[#09090b] border border-[#27272a] font-mono text-xs text-[#e4e4e7] min-h-[140px] space-y-2">
+                <div className="p-4 rounded-xl bg-slate-900 font-mono text-xs text-slate-200 min-h-[140px] space-y-2">
                   {loadingQuery ? (
-                    <div className="text-[#71717a] py-6 text-center animate-pulse">Running query planner...</div>
+                    <div className="text-slate-400 py-6 text-center animate-pulse">Running query planner...</div>
                   ) : queryResult?.explainPlan ? (
                     queryResult.explainPlan.map((step, idx) => (
                       <div key={idx} className="flex items-start gap-2 text-lime-200">
-                        <span className="text-lime-500">•</span>
+                        <span className="text-lime-400">•</span>
                         <span>{step}</span>
                       </div>
                     ))
                   ) : (
-                    <p className="text-[#71717a]">Select parameters and click execute to view query plan.</p>
+                    <p className="text-slate-500">Select parameters and click execute to view query plan.</p>
                   )}
                 </div>
               </div>
@@ -632,20 +632,20 @@ export default function Dashboard() {
             </div>
 
             {/* FETCHED RESULTS TABLE */}
-            <div className="rounded-xl bg-[#121215] border border-[#27272a] p-5 space-y-3">
+            <div className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 space-y-3">
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-white font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-lime-400" />
+                <span className="text-slate-900 font-bold flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-lime-600" />
                   Query Results ({selectedSdkObj?.name} on {selectedPlatform})
                 </span>
-                <span className="text-[#a1a1aa]">
+                <span className="text-slate-500">
                   Retrieved {queryResult?.resultCount || 0} matching apps
                 </span>
               </div>
 
-              <div className="overflow-x-auto rounded-lg border border-[#27272a]">
+              <div className="overflow-x-auto rounded-lg border border-slate-200">
                 <table className="w-full text-left text-xs font-mono">
-                  <thead className="bg-[#18181b] border-b border-[#27272a] text-[#a1a1aa] uppercase text-[10px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase text-[10px]">
                     <tr>
                       <th className="py-2.5 px-4">#</th>
                       <th className="py-2.5 px-4">App Name</th>
@@ -654,21 +654,21 @@ export default function Dashboard() {
                       <th className="py-2.5 px-4 text-right">Installs</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#27272a]">
+                  <tbody className="divide-y divide-slate-100">
                     {queryResult?.data.map((app, index) => (
-                      <tr key={app.id} className="hover:bg-[#18181b]/50">
-                        <td className="py-2 px-4 text-[#71717a]">{index + 1}</td>
-                        <td className="py-2 px-4 text-white font-sans font-medium">{app.name}</td>
-                        <td className="py-2 px-4 text-lime-300 text-[11px]">{app.bundle_id}</td>
-                        <td className="py-2 px-4 text-[#a1a1aa] text-[11px]">{app.developer}</td>
-                        <td className="py-2 px-4 text-right text-white font-bold">
+                      <tr key={app.id} className="hover:bg-slate-50">
+                        <td className="py-2 px-4 text-slate-400">{index + 1}</td>
+                        <td className="py-2 px-4 text-slate-900 font-sans font-semibold">{app.name}</td>
+                        <td className="py-2 px-4 text-lime-800 font-medium text-[11px]">{app.bundle_id}</td>
+                        <td className="py-2 px-4 text-slate-500 text-[11px]">{app.developer}</td>
+                        <td className="py-2 px-4 text-right text-slate-900 font-bold">
                           {app.installs.toLocaleString()}
                         </td>
                       </tr>
                     ))}
                     {(!queryResult || queryResult.data.length === 0) && (
                       <tr>
-                        <td colSpan={5} className="py-6 text-center text-[#71717a]">
+                        <td colSpan={5} className="py-6 text-center text-slate-400">
                           No records retrieved for this parameter combination.
                         </td>
                       </tr>
@@ -686,22 +686,22 @@ export default function Dashboard() {
           <div className="space-y-6 animate-in fade-in duration-300">
             
             {/* BENCHMARK HEADER CARD */}
-            <div className="p-6 rounded-xl bg-[#121215] border border-[#27272a] space-y-4">
-              <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
+            <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
-                  <h3 className="font-semibold text-sm tracking-tight text-white flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-lime-400" />
+                  <h3 className="font-bold text-sm tracking-tight text-slate-900 flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-lime-600 fill-lime-600" />
                     Database Index Latency & Sequential Scan Comparison
                   </h3>
-                  <p className="text-xs text-[#a1a1aa] mt-0.5">
-                    Demonstrates query acceleration on many-to-many lookup table <code className="text-lime-300">app_sdks(sdk_id)</code>.
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Demonstrates query acceleration on many-to-many lookup table <code className="text-lime-800 bg-lime-50 px-1 py-0.5 rounded border border-lime-300">app_sdks(sdk_id)</code>.
                   </p>
                 </div>
 
                 <button
                   onClick={runBenchmark}
                   disabled={runningBenchmark}
-                  className="py-2 px-4 rounded-lg bg-lime-400 hover:bg-lime-300 text-black font-semibold text-xs transition-all flex items-center gap-2 shadow-sm"
+                  className="py-2 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 text-lime-400 font-semibold text-xs transition-all flex items-center gap-2 shadow-sm"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 ${runningBenchmark ? 'animate-spin' : ''}`} />
                   {runningBenchmark ? 'Profiling...' : 'Re-Run Benchmark'}
@@ -712,29 +712,29 @@ export default function Dashboard() {
               {benchmarkData && (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                   
-                  <div className="p-5 rounded-lg bg-[#18181b] border border-[#27272a] space-y-2">
-                    <span className="text-xs text-[#a1a1aa] font-mono">UNINDEXED QUERY TIME</span>
-                    <div className="text-2xl font-bold font-mono text-red-400">
+                  <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <span className="text-xs text-slate-500 font-mono font-medium">UNINDEXED QUERY TIME</span>
+                    <div className="text-3xl font-bold font-mono text-red-600">
                       {benchmarkData.unindexedMs} ms
                     </div>
-                    <p className="text-[11px] text-[#71717a]">Forces Full Table Scan</p>
+                    <p className="text-[11px] text-slate-500">Forces Full Table Scan</p>
                   </div>
 
-                  <div className="p-5 rounded-lg bg-[#18181b] border border-lime-400/40 space-y-2 lime-border-glow">
-                    <span className="text-xs text-[#a1a1aa] font-mono">INDEXED B-TREE TIME</span>
-                    <div className="text-2xl font-bold font-mono text-lime-400">
+                  <div className="p-5 rounded-xl bg-lime-50/60 border border-lime-300 space-y-2">
+                    <span className="text-xs text-lime-800 font-mono font-bold">INDEXED B-TREE TIME</span>
+                    <div className="text-3xl font-bold font-mono text-lime-700">
                       {benchmarkData.indexedMs} ms
                     </div>
-                    <p className="text-[11px] text-lime-300/80">Uses idx_app_sdks_sdk_id Index</p>
+                    <p className="text-[11px] text-lime-800 font-medium">Uses idx_app_sdks_sdk_id Index</p>
                   </div>
 
-                  <div className="p-5 rounded-lg bg-[#18181b] border border-[#27272a] space-y-2">
-                    <span className="text-xs text-[#a1a1aa] font-mono">LATENCY REDUCTION</span>
-                    <div className="text-2xl font-bold font-mono text-white flex items-center gap-1">
+                  <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <span className="text-xs text-slate-500 font-mono font-medium">LATENCY REDUCTION</span>
+                    <div className="text-3xl font-bold font-mono text-slate-900 flex items-center gap-1">
                       <span>{benchmarkData.speedupMultiplier}x</span>
-                      <span className="text-xs font-normal text-lime-400">Faster</span>
+                      <span className="text-xs font-semibold text-lime-700">Faster</span>
                     </div>
-                    <p className="text-[11px] text-[#71717a]">Indexed vs Sequential scan speedup</p>
+                    <p className="text-[11px] text-slate-500">Indexed vs Sequential scan speedup</p>
                   </div>
 
                 </div>
@@ -746,12 +746,12 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
                 {/* UNINDEXED PLAN */}
-                <div className="p-5 rounded-xl bg-[#121215] border border-red-500/20 space-y-3">
+                <div className="p-5 rounded-xl bg-white border border-red-200 shadow-sm space-y-3">
                   <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-red-400 font-semibold uppercase">1. Without Index (Sequential Scan)</span>
-                    <span className="text-red-400 font-mono">{benchmarkData.unindexedMs} ms</span>
+                    <span className="text-red-700 font-bold uppercase">1. Without Index (Sequential Scan)</span>
+                    <span className="text-red-700 font-mono font-bold">{benchmarkData.unindexedMs} ms</span>
                   </div>
-                  <div className="p-4 rounded-lg bg-[#09090b] border border-red-500/20 font-mono text-xs text-[#a1a1aa] space-y-2">
+                  <div className="p-4 rounded-xl bg-slate-900 font-mono text-xs text-slate-300 space-y-2">
                     {benchmarkData.unindexedPlan.map((plan, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <span className="text-red-400">•</span>
@@ -762,12 +762,12 @@ export default function Dashboard() {
                 </div>
 
                 {/* INDEXED PLAN */}
-                <div className="p-5 rounded-xl bg-[#121215] border border-lime-400/30 space-y-3">
+                <div className="p-5 rounded-xl bg-white border border-lime-300 shadow-sm space-y-3">
                   <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-lime-400 font-semibold uppercase">2. With B-Tree Index (Index Scan)</span>
-                    <span className="text-lime-400 font-mono">{benchmarkData.indexedMs} ms</span>
+                    <span className="text-lime-800 font-bold uppercase">2. With B-Tree Index (Index Scan)</span>
+                    <span className="text-lime-800 font-mono font-bold">{benchmarkData.indexedMs} ms</span>
                   </div>
-                  <div className="p-4 rounded-lg bg-[#09090b] border border-lime-400/30 font-mono text-xs text-lime-200 space-y-2">
+                  <div className="p-4 rounded-xl bg-slate-900 font-mono text-xs text-lime-200 space-y-2">
                     {benchmarkData.indexedPlan.map((plan, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <span className="text-lime-400">•</span>
@@ -786,10 +786,10 @@ export default function Dashboard() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-[#27272a] bg-[#09090b] py-4 text-center text-xs text-[#71717a]">
+      <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>Mobile SDK Detector & Crawl Pipeline &bull; MixRank Focus Architecture</span>
-          <span className="font-mono text-[#a1a1aa]">Charan Sai Pathuri Portfolio Prototype</span>
+          <span>Mobile SDK Detector &bull; MixRank Data Pipeline Architecture</span>
+          <span className="font-mono text-slate-700 font-medium">Charan Sai Pathuri Portfolio Prototype</span>
         </div>
       </footer>
 

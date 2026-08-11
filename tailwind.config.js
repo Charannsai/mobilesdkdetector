@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#09090b",
-        surface: "#121215",
-        "surface-border": "#27272a",
+        background: "#ffffff",
+        surface: "#f8fafc",
+        "surface-border": "#e2e8f0",
         lime: {
           50: "#f7fee7",
           100: "#ecfccb",
@@ -22,6 +22,7 @@ module.exports = {
         },
       },
       fontFamily: {
+        sans: ['var(--font-inter)', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
       }
     },

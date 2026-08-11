@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #ffffff;
+  --foreground: #0f172a;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -22,11 +22,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
@@ -34,12 +34,11 @@ body {
   background: #84cc16;
 }
 
-/* Lime glowing highlight utilities */
-.lime-glow {
-  box-shadow: 0 0 20px -5px rgba(132, 204, 22, 0.25);
+/* Crisp light borders & subtle shadows */
+.card-shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
 }
 
-.lime-border-glow {
-  border-color: rgba(132, 204, 22, 0.4);
-  box-shadow: 0 0 15px -3px rgba(132, 204, 22, 0.15);
+.lime-glow {
+  box-shadow: 0 0 20px -5px rgba(132, 204, 22, 0.3);
 }
